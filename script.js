@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     notes.forEach(note => {
         const startDragging = (e) => {
-            e.preventDefault();
+            e.preventDefault(); 
+
+
             const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
             
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             moveAt(clientX, clientY);
 
             function onMove(event) {
+                event.preventDefault(); 
                 const clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
                 const clientY = event.type === 'touchmove' ? event.touches[0].clientY : event.clientY;
                 moveAt(clientX, clientY);
@@ -42,9 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         note.addEventListener('touchstart', startDragging);
         
         note.ondragstart = () => false; 
-    });
 
-  
     const heartsContainer = document.getElementById('hearts-container');
 
     for (let i = 0; i < 20; i++) { 
