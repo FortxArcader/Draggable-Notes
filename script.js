@@ -1,49 +1,20 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Draggable Notes
-    const notes = document.querySelectorAll('.note');
+document.querySelectorAll('.note').forEach(note => {
+    note.addEventListener('mousedown', function(e) {
+        const rect = note.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const offsetY = e.clientY - rect.top;
 
-    notes.forEach(note => {
-        note.addEventListener('mousedown', (e) => {
-            let shiftX = e.clientX - note.getBoundingClientRect().left;
-            let shiftY = e.clientY - note.getBoundingClientRect().top;
+        function onMouseMove(e) {
+            note.style.left = e.clientX - offsetX + 'px';
+            note.style.top = e.clientY - offsetY + 'px';
+        }
 
-            function moveAt(pageX, pageY) {
-                note.style.left = pageX - shiftX + 'px';
-                note.style.top = pageY - shiftY + 'px';
-            }
+        document.addEventListener('mousemove', onMouseMove);
 
-            moveAt(e.pageX, e.pageY);
-
-            function onMouseMove(event) {
-                moveAt(event.pageX, event.pageY);
-            }
-
-            document.addEventListener('mousemove', onMouseMove);
-
-            note.addEventListener('mouseup', () => {
-                document.removeEventListener('mousemove', onMouseMove);
-            });
-
-            note.addEventListener('mouseleave', () => {
-                document.removeEventListener('mousemove', onMouseMove);
-            });
-
-            note.ondragstart = () => false;
-        });
+        note.addEventListener('mouseup', function() {
+            document.removeEventListener('mousemove', onMouseMove);
+        }, { once: true });
     });
 
-    // Heart Falling Animation
-    const heartsContainer = document.getElementById('hearts-container');
-
-    for (let i = 0; i < 20; i++) { // You can adjust the number of hearts
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDelay = Math.random() * 2 + 's';
-        heartsContainer.appendChild(heart);
-    }
-
-    setTimeout(() => {
-        heartsContainer.classList.add('hide-hearts');
-    }, 5000); // Remove hearts after 5 seconds
+    note.ondragstart = () => false;  // Prevent default drag behavior
 });
