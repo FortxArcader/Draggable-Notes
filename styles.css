@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../images/background.jpg'); 
+    background-image: url('https://fortxarcader.github.io/Draggable-Notes/images/background.jpg'); 
     background-size: cover;
     overflow: hidden;
     position: relative;
