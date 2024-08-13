@@ -23,7 +23,7 @@ body {
     font-family: 'raleway', Courier, monospace; 
     cursor: grab;
     overflow: hidden;
-    background: url('../images/notespage.webp'); 
+    background: url('https://fortxarcader.github.io/Draggable-Notes/images/notespage.webp'); 
     background-size: cover;
     color: #333; 
 }
@@ -73,7 +73,7 @@ body {
         position: absolute;
         width: 50px;
         height: 50px;
-        background-image: url('./images/heart.JPG');
+        background-image: url('https://fortxarcader.github.io/Draggable-Notes/images/heart.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
