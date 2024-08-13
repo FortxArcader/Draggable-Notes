@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Draggable Notes
     const notes = document.querySelectorAll('.note');
 
     notes.forEach(note => {
         const startDragging = (e) => {
-            e.preventDefault(); 
-
+            e.preventDefault();
 
             const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             moveAt(clientX, clientY);
 
             function onMove(event) {
-                event.preventDefault(); 
+                event.preventDefault();
                 const clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
                 const clientY = event.type === 'touchmove' ? event.touches[0].clientY : event.clientY;
                 moveAt(clientX, clientY);
@@ -44,11 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         note.addEventListener('mousedown', startDragging);
         note.addEventListener('touchstart', startDragging);
         
-        note.ondragstart = () => false; 
+        note.ondragstart = () => false;
+    });
 
     const heartsContainer = document.getElementById('hearts-container');
 
-    for (let i = 0; i < 20; i++) { 
+    for (let i = 0; i < 20; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.style.left = Math.random() * 100 + 'vw';
@@ -58,5 +57,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
         heartsContainer.classList.add('hide-hearts');
-    }, 5000); 
+    }, 5000);
 });
