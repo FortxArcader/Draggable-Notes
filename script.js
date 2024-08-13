@@ -1,53 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Draggable Notes
     const notes = document.querySelectorAll('.note');
 
     notes.forEach(note => {
-        const startDragging = (e) => {
-            e.preventDefault();
-
-            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-            
-            let shiftX = clientX - note.getBoundingClientRect().left;
-            let shiftY = clientY - note.getBoundingClientRect().top;
+        note.addEventListener('mousedown', (e) => {
+            let shiftX = e.clientX - note.getBoundingClientRect().left;
+            let shiftY = e.clientY - note.getBoundingClientRect().top;
 
             function moveAt(pageX, pageY) {
                 note.style.left = pageX - shiftX + 'px';
                 note.style.top = pageY - shiftY + 'px';
             }
 
-            moveAt(clientX, clientY);
+            moveAt(e.pageX, e.pageY);
 
-            function onMove(event) {
-                event.preventDefault();
-                const clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
-                const clientY = event.type === 'touchmove' ? event.touches[0].clientY : event.clientY;
-                moveAt(clientX, clientY);
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
             }
 
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('touchmove', onMove);
+            document.addEventListener('mousemove', onMouseMove);
 
-            function stopDragging() {
-                document.removeEventListener('mousemove', onMove);
-                document.removeEventListener('touchmove', onMove);
-                document.removeEventListener('mouseup', stopDragging);
-                document.removeEventListener('touchend', stopDragging);
-            }
+            note.addEventListener('mouseup', () => {
+                document.removeEventListener('mousemove', onMouseMove);
+            });
 
-            document.addEventListener('mouseup', stopDragging);
-            document.addEventListener('touchend', stopDragging);
-        };
+            note.addEventListener('mouseleave', () => {
+                document.removeEventListener('mousemove', onMouseMove);
+            });
 
-        note.addEventListener('mousedown', startDragging);
-        note.addEventListener('touchstart', startDragging);
-        
-        note.ondragstart = () => false;
+            note.ondragstart = () => false;
+        });
     });
 
+    // Heart Falling Animation
     const heartsContainer = document.getElementById('hearts-container');
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 20; i++) { // You can adjust the number of hearts
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.style.left = Math.random() * 100 + 'vw';
@@ -57,5 +45,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
         heartsContainer.classList.add('hide-hearts');
-    }, 5000);
+    }, 5000); // Remove hearts after 5 seconds
 });
