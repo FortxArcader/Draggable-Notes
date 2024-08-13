@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/images/background.jpg'); 
+    background-image: url('./images/background.jpg'); 
     background-size: cover;
     overflow: hidden;
     position: relative;
@@ -23,7 +23,7 @@ body {
     font-family: 'raleway', Courier, monospace; 
     cursor: grab;
     overflow: hidden;
-    background: url('/images/notespage.webp'); 
+    background: url('./images/notespage.webp'); 
     background-size: cover;
     color: #333; 
 }
@@ -73,7 +73,7 @@ body {
         position: absolute;
         width: 50px;
         height: 50px;
-        background-image: url('/images/heart.jpg');
+        background-image: url('./images/heart.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
